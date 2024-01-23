@@ -49,5 +49,9 @@ namespace Chess
             }
         }
 
+        private void startBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
