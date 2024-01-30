@@ -5,63 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Chess"
         mc:Ignorable="d"
-        Title="MainWindow" Height="700" Width="600">
+        Title="MainWindow" Height="800" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="3*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" x:Name="Field" Margin="15">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-
-            <Button x:Name="btn00" Grid.Row="0" Grid.Column="0" Click="Cell_Click"/>
-            <Button x:Name="btn01" Grid.Row="0" Grid.Column="1" Click="Cell_Click"/>
-            <Button x:Name="btn02" Grid.Row="0" Grid.Column="2" Click="Cell_Click"/>
-            <Button x:Name="btn03" Grid.Row="0" Grid.Column="3" Click="Cell_Click"/>
-            <Button x:Name="btn04" Grid.Row="0" Grid.Column="4" Click="Cell_Click"/>
-
-            <Button x:Name="btn10" Grid.Row="1" Grid.Column="0" Click="Cell_Click"/>
-            <Button x:Name="btn11" Grid.Row="1" Grid.Column="1" Click="Cell_Click"/>
-            <Button x:Name="btn12" Grid.Row="1" Grid.Column="2" Click="Cell_Click"/>
-            <Button x:Name="btn13" Grid.Row="1" Grid.Column="3" Click="Cell_Click"/>
-            <Button x:Name="btn14" Grid.Row="1" Grid.Column="4" Click="Cell_Click"/>
-
-            <Button x:Name="btn20" Grid.Row="2" Grid.Column="0" Click="Cell_Click"/>
-            <Button x:Name="btn21" Grid.Row="2" Grid.Column="1" Click="Cell_Click"/>
-            <Button x:Name="btn22" Grid.Row="2" Grid.Column="2" Click="Cell_Click"/>
-            <Button x:Name="btn23" Grid.Row="2" Grid.Column="3" Click="Cell_Click"/>
-            <Button x:Name="btn24" Grid.Row="2" Grid.Column="4" Click="Cell_Click"/>
-
-            <Button x:Name="btn30" Grid.Row="3" Grid.Column="0" Click="Cell_Click"/>
-            <Button x:Name="btn31" Grid.Row="3" Grid.Column="1" Click="Cell_Click"/>
-            <Button x:Name="btn32" Grid.Row="3" Grid.Column="2" Click="Cell_Click"/>
-            <Button x:Name="btn33" Grid.Row="3" Grid.Column="3" Click="Cell_Click"/>
-            <Button x:Name="btn34" Grid.Row="3" Grid.Column="4" Click="Cell_Click"/>
-
-            <Button x:Name="btn40" Grid.Row="4" Grid.Column="0" Click="Cell_Click"/>
-            <Button x:Name="btn41" Grid.Row="4" Grid.Column="1" Click="Cell_Click"/>
-            <Button x:Name="btn42" Grid.Row="4" Grid.Column="2" Click="Cell_Click"/>
-            <Button x:Name="btn43" Grid.Row="4" Grid.Column="3" Click="Cell_Click"/>
-            <Button x:Name="btn44" Grid.Row="4" Grid.Column="4" Click="Cell_Click"/>
-        </Grid>
-        <StackPanel Grid.Row="2" Orientation="Vertical">
-            <ComboBox Width="200" Height="40" Margin="0,5,0,25" x:Name="MinesCountLbx"/>
-            <Button Height="50" Width="200" Margin="0,0,0,0" Content="Start Game" x:Name="startBtn" Click="startBtn_Click"/>
             
-        </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1" x:Name="settings">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Row="2" Orientation="Vertical">
+                <ComboBox Width="200" Height="40" Margin="0,5,0,25" x:Name="MinesCountLbx"/>
+
+                <Button Height="50" Width="200" Margin="0,0,0,0" Content="Start Game" x:Name="startBtn" Click="startBtn_Click"/>
+
+            </StackPanel>
+            <StackPanel Grid.Row="2" Orientation="Vertical" Grid.Column="1">
+                <ComboBox Width="200" Height="40" Margin="0,5,0,25" x:Name="RowsCountCbx"/>
+                <ComboBox Width="200" Height="40" Margin="0,5,0,25" x:Name="CollumnsCountCbx"/>
+
+            </StackPanel>
+        </Grid>
         
+
+
     </Grid>
 </Window>
