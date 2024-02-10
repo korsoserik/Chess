@@ -6,6 +6,13 @@
         xmlns:local="clr-namespace:Chess"
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="800">
+    <Window.Resources>
+        <Style x:Key="MineButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Gray"/>
+            <Setter Property="Foreground" Value="Black"/>
+        </Style>
+    </Window.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="3*"/>
@@ -20,14 +27,14 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Row="2" Orientation="Vertical">
-                <ComboBox Width="200" Height="40" Margin="0,5,0,25" x:Name="MinesCountLbx"/>
+                <ComboBox Width="200" Height="40" Margin="0,5,0,25" x:Name="MinesCountCbx" SelectionChanged="MinesCountCbx_SelectionChanged"/>
 
                 <Button Height="50" Width="200" Margin="0,0,0,0" Content="Start Game" x:Name="startBtn" Click="startBtn_Click"/>
 
             </StackPanel>
             <StackPanel Grid.Row="2" Orientation="Vertical" Grid.Column="1">
-                <ComboBox Width="200" Height="40" Margin="0,5,0,25" x:Name="RowsCountCbx"/>
-                <ComboBox Width="200" Height="40" Margin="0,5,0,25" x:Name="CollumnsCountCbx"/>
+                <ComboBox Width="200" Height="40" Margin="0,5,0,25" x:Name="RowsCountCbx" SelectionChanged="RowsCountCbx_SelectionChanged"/>
+                <ComboBox Width="200" Height="40" Margin="0,5,0,25" x:Name="CollumnsCountCbx" SelectionChanged="CollumnsCountCbx_SelectionChanged"/>
 
             </StackPanel>
         </Grid>
