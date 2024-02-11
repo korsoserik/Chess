@@ -3,40 +3,83 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sysglb="clr-namespace:System.Globalization;assembly=mscorlib"
         xmlns:local="clr-namespace:Chess"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="800">
+        Title="MainWindow" Height="900" Width="1000"
+        ResizeMode="NoResize">
     <Window.Resources>
         <Style x:Key="MineButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="Gray"/>
             <Setter Property="Foreground" Value="Black"/>
         </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="HorizontalContentAlignment" Value="Left"></Setter>
+            <Setter Property="VerticalContentAlignment" Value="Center"> </Setter>
+            <Setter Property="Padding" Value="5"></Setter>
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+        </Style>
     </Window.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="3*"/>
+            <RowDefinition Height="4*"/>
             <RowDefinition/>
+            
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2.5*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <Grid Grid.Row="0" x:Name="Field" Margin="15">
             
         </Grid>
-        <Grid Grid.Row="1" x:Name="settings">
+        <Grid x:Name="Data" Grid.Row="0" Grid.Column="1">
+            <StackPanel Margin="0,15,0,0">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Wallet" Margin="0,5,0,0" FontSize="20"/>
+                    <TextBox Width="200" Margin="0,5,0,0" IsHitTestVisible="False" x:Name="walletTxb"/>
+                </StackPanel>
+                <StackPanel  Orientation="Vertical" Margin="10,50,0,0" HorizontalAlignment="Left">
+                    <Label Content="Total Profit" Width="250" Padding="0,10,0,0" />
+                    <TextBox Width="250" Height="40" Margin="0,5,0,0" x:Name="profitTxb" IsHitTestVisible="False" />
+
+
+                </StackPanel>
+            </StackPanel>
+            
+        </Grid>
+        <Grid Grid.Row="1" Grid.ColumnSpan="2" x:Name="settings">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Row="2" Orientation="Vertical">
+                <Label Content="Number of Mines" Width="200" Padding="0,10,0,0"/>
                 <ComboBox Width="200" Height="40" Margin="0,5,0,25" x:Name="MinesCountCbx" SelectionChanged="MinesCountCbx_SelectionChanged"/>
 
-                <Button Height="50" Width="200" Margin="0,0,0,0" Content="Start Game" x:Name="startBtn" Click="startBtn_Click"/>
+                <Button Height="50" Width="200" Margin="0,0,0,0" Content="Bet" x:Name="startBtn" Click="startBtn_Click"/>
 
             </StackPanel>
-            <StackPanel Grid.Row="2" Orientation="Vertical" Grid.Column="1">
-                <ComboBox Width="200" Height="40" Margin="0,5,0,25" x:Name="RowsCountCbx" SelectionChanged="RowsCountCbx_SelectionChanged"/>
-                <ComboBox Width="200" Height="40" Margin="0,5,0,25" x:Name="CollumnsCountCbx" SelectionChanged="CollumnsCountCbx_SelectionChanged"/>
+            <StackPanel Grid.Row="2" Orientation="Vertical" Grid.Column="1" >
+                <Label Content="Number of Rows" Width="200" Padding="0,10,0,0"/>
+                <ComboBox Width="200" Height="40" Margin="0,5,0,0" x:Name="RowsCountCbx" SelectionChanged="RowsCountCbx_SelectionChanged"/>
+                <Label Content="Number of Columns" Width="200" Padding="0,10,0,0"/>
+                <ComboBox Width="200" Height="40" Margin="0,5,0,0" x:Name="CollumnsCountCbx" SelectionChanged="CollumnsCountCbx_SelectionChanged"/>
 
             </StackPanel>
+            <StackPanel Grid.Row="2" Grid.Column="2" Orientation="Vertical" Margin="0,0,0,0">
+                <Label Content="Bet Amount" Width="200" Padding="0,10,0,0"/>
+                <TextBox Width="200" Height="40" Margin="0,5,0,0" x:Name="BetAmountTxb" GotFocus="CurrencyTextBox_GotFocus" PreviewTextInput="CurrencyTextBox_PreviewTextInput" LostFocus="CurrencyTextBox_LostFocus" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Label Content="Gems Left" Width="200" Padding="0,10,0,0" />
+                <TextBox Height="40" Width="200" Margin="0,5,0,0"  x:Name="GemsLeftLbl" IsHitTestVisible="False"/>
+
+            </StackPanel>
+            
         </Grid>
         
 
