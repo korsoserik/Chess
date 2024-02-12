@@ -39,10 +39,6 @@
                 <TextBox x:Name="UsernameTXB" />
             </DockPanel>
             <DockPanel>
-                <Label Content="E-mail:"/>
-                <TextBox x:Name="EmailTXB"/>
-            </DockPanel>
-            <DockPanel>
                 <Label Content="Password:"/>
                 <TextBox x:Name="PasswordTXB"/>
             </DockPanel>

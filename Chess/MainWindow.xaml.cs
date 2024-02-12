@@ -43,7 +43,7 @@ namespace Chess
         }
         private GameState currentGameState;
 
-        public MainWindow()
+        public MainWindow(user user)
         {
             InitializeComponent();
             Loadcbx();
