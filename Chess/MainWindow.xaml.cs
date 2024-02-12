@@ -66,12 +66,12 @@ namespace Chess
 
 
             decimal cashoutValue = decimal.Parse(BetAmountTxb.Text, NumberStyles.Currency) * multiplier;
-            
+
 
             currentWallet += cashoutValue;
             MessageBox.Show($"You cashed out with {clickedButtonsCount} gems. Cashout Value: {cashoutValue:C}. New Wallet Balance: {currentWallet:C}");
 
-         
+
             currentGameState = GameState.Start;
             ToggleButtonText();
             GemsLeftLbl.Text = "0";
@@ -80,15 +80,15 @@ namespace Chess
 
         private void ToggleButtonText()
         {
-            startBtn.Content = (currentGameState == GameState.Start) ? "Start" : "Cashout"  ;
+            startBtn.Content = (currentGameState == GameState.Start) ? "Start" : "Cashout";
         }
 
         private void startBtn_Click(object sender, RoutedEventArgs e)
         {
-            
+
             if (currentGameState == GameState.Start)
             {
-              
+
                 ClearField();
                 LoadField();
                 gemsLeft = RowsCount * ColumnsCount - MinesCount - clickedButtonsCount;
@@ -96,12 +96,12 @@ namespace Chess
                 DisableSettings();
                 currentWallet -= decimal.Parse(BetAmountTxb.Text.Replace(CultureInfo.CurrentCulture.NumberFormat.CurrencySymbol, string.Empty));
                 UpdateWallet();
-                
+
                 currentGameState = GameState.Cashout;
             }
             else if (currentGameState == GameState.Cashout)
             {
-                
+
                 if (clickedButtonsCount == 0)
                 {
                     MessageBox.Show("Click at least one mine to cashout!");
@@ -115,14 +115,14 @@ namespace Chess
                     UpdateWallet();
                 }
             }
-            
+
             ToggleButtonText();
         }
 
         void Loadcbx()
         {
 
-            
+
             for (int i = 3; i <= 7; i++)
             {
                 CollumnsCountCbx.Items.Add(i);
@@ -151,7 +151,7 @@ namespace Chess
 
         void minesCbxchange()
         {
-            
+
             UpdateRows();
             MinesCountCbx.Items.Clear();
             for (int i = 1; i <= RowsCount * ColumnsCount - 1; i++)
@@ -195,6 +195,7 @@ namespace Chess
                     button.HorizontalContentAlignment = HorizontalAlignment.Center;
                     button.VerticalContentAlignment = VerticalAlignment.Center;
                     button.Style = FindResource("MineButtonStyle") as Style;
+
 
                     uniformGrid.Children.Add(button);
                     buttonsGrid[i, j] = button;
@@ -247,7 +248,7 @@ namespace Chess
             return null;
         }
 
-         private void EnableSettings()
+        private void EnableSettings()
         {
             MinesCountCbx.IsHitTestVisible = true;
             CollumnsCountCbx.IsHitTestVisible = true;
@@ -277,16 +278,16 @@ namespace Chess
 
         private void GameOver()
         {
-            
-            
+
+
             RevalAllMines();
-            GemsLeftLbl.Text = "0"; 
+            GemsLeftLbl.Text = "0";
             currentGameState = GameState.Start;
             EnableSettings();
             ToggleButtonText();
             profitTxb.Text = $"{0:C}";
             MessageBox.Show("Game Over! All mines revealed.");
-            
+
         }
 
 
@@ -335,13 +336,13 @@ namespace Chess
 
         private void UpdateProfit()
         {
-            
+
             decimal tilesCount = ColumnsCount * RowsCount;
             multiplier += 1 + (MinesCount / (tilesCount - clickedButtonsCount));
 
-            
-            decimal cashoutValue =  decimal.Parse(BetAmountTxb.Text, NumberStyles.Currency) * multiplier;
-            profitTxb.Text = $"{Math.Round(cashoutValue,2):C}";
+
+            decimal cashoutValue = decimal.Parse(BetAmountTxb.Text, NumberStyles.Currency) * multiplier;
+            profitTxb.Text = $"{Math.Round(cashoutValue, 2):C}";
         }
 
         private void Win()
@@ -352,7 +353,8 @@ namespace Chess
             EnableSettings();
             ToggleButtonText();
             currentWallet += decimal.Parse(profitTxb.Text, NumberStyles.Currency);
-            MessageBox.Show($"You have found all {clickedButtonsCount-1} gem(s). You won: {profitTxb.Text}. New Wallet Balance: {currentWallet:C}");
+            MessageBox.Show($"You have found all {clickedButtonsCount - 1} gem(s). You won: {profitTxb.Text}. New Wallet Balance: {currentWallet:C}");
+            walletTxb.Text = $"{currentWallet:C}";
             profitTxb.Text = $"{0:C}";
         }
 
@@ -375,13 +377,13 @@ namespace Chess
                 {
                     Win();
                 }
-                
+
 
 
             }
         }
 
-   
+
 
         private void MinesCountCbx_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -415,7 +417,7 @@ namespace Chess
 
         private void CurrencyTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            
+
             if (!Regex.IsMatch(e.Text, @"^[0-9]*$"))
             {
                 e.Handled = true;
@@ -424,22 +426,22 @@ namespace Chess
 
         private void CurrencyTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            
+
             UpdateCurrencyTextBoxText();
         }
 
         private void UpdateCurrencyTextBoxText()
         {
-            
+
             if (decimal.TryParse(BetAmountTxb.Text, NumberStyles.Currency, CultureInfo.CurrentCulture, out decimal value))
             {
-                
+
                 value = Math.Max(200, Math.Min(currentWallet, value));
                 BetAmountTxb.Text = value.ToString("C", CultureInfo.CurrentCulture);
             }
             else
             {
-             
+
                 BetAmountTxb.Text = "200.00";
             }
         }

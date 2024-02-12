@@ -12,6 +12,7 @@
         <Style x:Key="MineButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="Gray"/>
             <Setter Property="Foreground" Value="Black"/>
+      
         </Style>
         <Style TargetType="TextBox">
             <Setter Property="HorizontalContentAlignment" Value="Left"></Setter>
