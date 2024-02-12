@@ -34,6 +34,7 @@ namespace Chess
         private decimal currentWallet = 10000;
         private int gemsLeft;
         private decimal multiplier = 0;
+        user currentuser;
 
 
         private enum GameState
@@ -49,6 +50,7 @@ namespace Chess
             Loadcbx();
             minesCbxchange();
             UpdateWallet();
+            this.currentuser = user;
             BetAmountTxb.Text = $"{200.00:C}";
             currentGameState = GameState.Start;
 

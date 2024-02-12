@@ -49,7 +49,7 @@
         </StackPanel>
         <StackPanel Grid.Row="1">
             <DockPanel HorizontalAlignment="Center">
-                <Button x:Name="UserLoginBTN" Content="Login" HorizontalAlignment="Right" />
+                <Button x:Name="UserLoginBTN" Content="Login" HorizontalAlignment="Right" Click="UserLoginBTN_Click" />
                 <Button x:Name="Register" Content="Register" />
             </DockPanel>
         </StackPanel>
