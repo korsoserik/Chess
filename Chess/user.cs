@@ -11,6 +11,7 @@ namespace Chess
         public int id { get; set; }
         public string name { get; set; }
         public string password { get; set; }
+        public decimal money { get; set; }
         //public DateTime freereward { get; set; }
 
         public user(string sor)
@@ -19,6 +20,7 @@ namespace Chess
             id = int.Parse(data[0]);
             name = data[1];
             password = data[2];
+            money = decimal.Parse(data[3]);
             //freereward  = DateTime.Parse(data[3]);
         }
     }

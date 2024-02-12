@@ -7,6 +7,7 @@
         xmlns:local="clr-namespace:Chess"
         mc:Ignorable="d"
         Title="MainWindow" Height="900" Width="1000"
+        Closed="Window_Closed"
         ResizeMode="NoResize">
     <Window.Resources>
         <Style x:Key="MineButtonStyle" TargetType="Button">

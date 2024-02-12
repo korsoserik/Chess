@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -31,10 +33,10 @@ namespace Chess
         bool intialsetup = true;
         private List<Button> mineButtons;
         private int clickedButtonsCount;
-        private decimal currentWallet = 10000;
         private int gemsLeft;
         private decimal multiplier = 0;
         user currentuser;
+        ObservableCollection<user> users;
 
 
         private enum GameState
@@ -44,13 +46,14 @@ namespace Chess
         }
         private GameState currentGameState;
 
-        public MainWindow(user user)
+        public MainWindow(user cuser, ObservableCollection<user> users)
         {
             InitializeComponent();
+            this.currentuser = cuser;
+            this.users = users;
             Loadcbx();
             minesCbxchange();
             UpdateWallet();
-            this.currentuser = user;
             BetAmountTxb.Text = $"{200.00:C}";
             currentGameState = GameState.Start;
 
@@ -58,7 +61,7 @@ namespace Chess
 
         private void UpdateWallet()
         {
-            walletTxb.Text = $"{currentWallet:C}";
+            walletTxb.Text = $"{currentuser.money.ToString():C}";
         }
 
         private void CalculateCashout()
@@ -70,8 +73,8 @@ namespace Chess
             decimal cashoutValue = decimal.Parse(BetAmountTxb.Text, NumberStyles.Currency) * multiplier;
 
 
-            currentWallet += cashoutValue;
-            MessageBox.Show($"You cashed out with {clickedButtonsCount} gems. Cashout Value: {cashoutValue:C}. New Wallet Balance: {currentWallet:C}");
+            currentuser.money += cashoutValue;
+            MessageBox.Show($"You cashed out with {clickedButtonsCount} gems. Cashout Value: {cashoutValue:C}. New Wallet Balance: {currentuser.money:C}");
 
 
             currentGameState = GameState.Start;
@@ -96,7 +99,7 @@ namespace Chess
                 gemsLeft = RowsCount * ColumnsCount - MinesCount - clickedButtonsCount;
                 GemsLeftLbl.Text = gemsLeft.ToString();
                 DisableSettings();
-                currentWallet -= decimal.Parse(BetAmountTxb.Text.Replace(CultureInfo.CurrentCulture.NumberFormat.CurrencySymbol, string.Empty));
+                currentuser.money -= decimal.Parse(BetAmountTxb.Text.Replace(CultureInfo.CurrentCulture.NumberFormat.CurrencySymbol, string.Empty));
                 UpdateWallet();
 
                 currentGameState = GameState.Cashout;
@@ -354,9 +357,9 @@ namespace Chess
             currentGameState = GameState.Start;
             EnableSettings();
             ToggleButtonText();
-            currentWallet += decimal.Parse(profitTxb.Text, NumberStyles.Currency);
-            MessageBox.Show($"You have found all {clickedButtonsCount - 1} gem(s). You won: {profitTxb.Text}. New Wallet Balance: {currentWallet:C}");
-            walletTxb.Text = $"{currentWallet:C}";
+            currentuser.money += decimal.Parse(profitTxb.Text, NumberStyles.Currency);
+            MessageBox.Show($"You have found all {clickedButtonsCount - 1} gem(s). You won: {profitTxb.Text}. New Wallet Balance: {currentuser.money:C}");
+            walletTxb.Text = $"{currentuser.money:C}";
             profitTxb.Text = $"{0:C}";
         }
 
@@ -438,7 +441,7 @@ namespace Chess
             if (decimal.TryParse(BetAmountTxb.Text, NumberStyles.Currency, CultureInfo.CurrentCulture, out decimal value))
             {
 
-                value = Math.Max(200, Math.Min(currentWallet, value));
+                value = Math.Max(200, Math.Min(currentuser.money, value));
                 BetAmountTxb.Text = value.ToString("C", CultureInfo.CurrentCulture);
             }
             else
@@ -454,6 +457,28 @@ namespace Chess
             {
                 textBox.Text = textBox.Text.Replace(CultureInfo.CurrentCulture.NumberFormat.CurrencySymbol, string.Empty);
             }
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            int index = 0;
+            foreach (var item in users)
+            {
+                if (item.id == currentuser.id)
+                {
+                    break;
+                }
+                index++;
+            }
+            users.RemoveAt(index);
+            users.Add(currentuser);
+            StreamWriter sw = new StreamWriter("Logininformation.csv");
+            sw.WriteLine("Userid;Username;Password;Money");
+            foreach (var item in users)
+            {
+                sw.WriteLine($"{item.id};{item.name};{item.password};{item.money}");
+            }
+            sw.Close();
         }
     }
 }
