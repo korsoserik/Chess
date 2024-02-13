@@ -94,16 +94,23 @@ namespace Chess
 
             if (currentGameState == GameState.Start)
             {
+                if (!CheckWallet())
+                {
+                    ClearField();
+                    LoadField();
+                    gemsLeft = RowsCount * ColumnsCount - MinesCount - clickedButtonsCount;
+                    GemsLeftLbl.Text = gemsLeft.ToString();
+                    DisableSettings();
+                    currentuser.money -= decimal.Parse(BetAmountTxb.Text.Replace(CultureInfo.CurrentCulture.NumberFormat.CurrencySymbol, string.Empty));
+                    UpdateWallet();
 
-                ClearField();
-                LoadField();
-                gemsLeft = RowsCount * ColumnsCount - MinesCount - clickedButtonsCount;
-                GemsLeftLbl.Text = gemsLeft.ToString();
-                DisableSettings();
-                currentuser.money -= decimal.Parse(BetAmountTxb.Text.Replace(CultureInfo.CurrentCulture.NumberFormat.CurrencySymbol, string.Empty));
-                UpdateWallet();
+                    currentGameState = GameState.Cashout;
+                }
+                else
+                {
+                    MessageBox.Show("Your current balance is too low for this bet!");
+                }
 
-                currentGameState = GameState.Cashout;
             }
             else if (currentGameState == GameState.Cashout)
             {
@@ -148,6 +155,18 @@ namespace Chess
 
         }
 
+        bool CheckWallet()
+        {
+            if (decimal.Parse(BetAmountTxb.Text.Replace(CultureInfo.CurrentCulture.NumberFormat.CurrencySymbol, string.Empty)) > decimal.Parse(BetAmountTxb.Text.Replace(CultureInfo.CurrentCulture.NumberFormat.CurrencySymbol, string.Empty)))
+            {
+                
+                return false;
+            }
+            else
+            {
+                return true; 
+            }
+        }
 
         void UpdateRows()
         {
@@ -453,7 +472,7 @@ namespace Chess
         }
         private void CurrencyTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            // Remove the currency symbol when the TextBox gains focus
+          
             if (sender is TextBox textBox)
             {
                 textBox.Text = textBox.Text.Replace(CultureInfo.CurrentCulture.NumberFormat.CurrencySymbol, string.Empty);

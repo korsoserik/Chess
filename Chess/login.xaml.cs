@@ -47,7 +47,7 @@ namespace Chess
             foreach (var item in users)
             {
 
-                if (item.name == UsernameTXB.Text && item.password == PasswordTXB.Text)
+                if (item.name == UsernameTXB.Text && item.password == PasswordTXB.Password)
                 {
                     létezike = true;
                     MainWindow main = new MainWindow(users[index], users);
@@ -59,7 +59,7 @@ namespace Chess
             }
             if (!létezike)
             {
-                MessageBox.Show("Nem létezik ilyen felhasználo");
+                MessageBox.Show("This user does not exist!");
             }
         }
 
@@ -74,13 +74,13 @@ namespace Chess
                 }
             }
             bool korrektFelhasznaloAdatok = true;
-            if (!String.IsNullOrEmpty(UsernameTXB.Text) && !String.IsNullOrEmpty(PasswordTXB.Text))
+            if (!String.IsNullOrEmpty(UsernameTXB.Text) && !String.IsNullOrEmpty(PasswordTXB.Password))
             {
                 foreach (var user in users)
                 {
                     if (user.name == UsernameTXB.Text)
                     {
-                        MessageBox.Show("Már létezik ilyen névvel felhasználó!");
+                        MessageBox.Show("This username is already in use!");
                         korrektFelhasznaloAdatok = false;
                     }
 
@@ -95,16 +95,16 @@ namespace Chess
                     {
                         sw.WriteLine($"{item.id};{item.name};{item.password};{item.money};{item.freereward}");
                     }
-                    sw.WriteLine($"{maxId};{UsernameTXB.Text};{PasswordTXB.Text};10000;{DateTime.Now}");
+                    sw.WriteLine($"{maxId};{UsernameTXB.Text};{PasswordTXB.Password};10000;{DateTime.Now}");
                     sw.Close();
-                    MessageBox.Show("sikeres regisztrácio");
+                    MessageBox.Show("Successful registration!");
                     users.Clear();
                     fileRead();
                     int index = 0;
                     foreach (var item in users)
                     {
 
-                        if (item.name == UsernameTXB.Text && item.password == PasswordTXB.Text)
+                        if (item.name == UsernameTXB.Text && item.password == PasswordTXB.Password)
                         {
                             MainWindow main = new MainWindow(users[index], users);
                             this.Close();
@@ -117,7 +117,7 @@ namespace Chess
             }
             else
             {
-                MessageBox.Show("Minden mező kitöltése kötelező!");
+                MessageBox.Show("All fields must be filled!");
             }
         }
     }
