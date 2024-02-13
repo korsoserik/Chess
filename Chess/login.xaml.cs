@@ -100,6 +100,21 @@ namespace Chess
                     MessageBox.Show("sikeres regisztrácio");
                     UsernameTXB.Text = "";
                     PasswordTXB.Text = "";
+                    users.Clear();
+                    fileRead();
+                    int index = 0;
+                    foreach (var item in users)
+                    {
+
+                        if (item.name == UsernameTXB.Text && item.password == PasswordTXB.Text)
+                        {
+                            MainWindow main = new MainWindow(users[index], users);
+                            this.Close();
+                            main.ShowDialog();
+                            break;
+                        }
+                        index++;
+                    }
                 }
             }
             else
