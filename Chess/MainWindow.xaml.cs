@@ -160,7 +160,7 @@ namespace Chess
 
         bool CheckWallet()
         {
-            if (decimal.Parse(walletTxb.Text.Replace(CultureInfo.CurrentCulture.NumberFormat.CurrencySymbol, string.Empty)) > decimal.Parse(BetAmountTxb.Text.Replace(CultureInfo.CurrentCulture.NumberFormat.CurrencySymbol, string.Empty)))
+            if (decimal.Parse(walletTxb.Text.Replace(CultureInfo.CurrentCulture.NumberFormat.CurrencySymbol, string.Empty)) < decimal.Parse(BetAmountTxb.Text.Replace(CultureInfo.CurrentCulture.NumberFormat.CurrencySymbol, string.Empty)))
             {
                 
                 return false;
