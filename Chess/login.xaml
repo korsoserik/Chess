@@ -25,7 +25,7 @@
         </Style>
 
     </Window.Resources>
-    <Grid>
+    <Grid Background="#FF222831">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
@@ -33,13 +33,13 @@
             <RowDefinition Height="120"></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
-        <StackPanel>
+        <StackPanel Height="80">
             <DockPanel>
-                <Label Content="Username:"/>
-                <TextBox x:Name="UsernameTXB" />
+                <Label Content="Username:" Foreground="White"/>
+                <TextBox x:Name="UsernameTXB" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
             </DockPanel>
             <DockPanel>
-                <Label Content="Password:"/>
+                <Label Content="Password:" Foreground="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
                 <TextBox x:Name="PasswordTXB"/>
             </DockPanel>
 
@@ -49,8 +49,8 @@
         </StackPanel>
         <StackPanel Grid.Row="1">
             <DockPanel HorizontalAlignment="Center">
-                <Button x:Name="UserLoginBTN" Content="Login" HorizontalAlignment="Right" Click="UserLoginBTN_Click" />
-                <Button x:Name="Register" Content="Register" Click="Register_Click" />
+                <Button x:Name="UserLoginBTN" Content="Login" HorizontalAlignment="Right" Click="UserLoginBTN_Click" Foreground="White" Background="#FF5B8EA4" />
+                <Button x:Name="Register" Content="Register" Click="Register_Click" Background="#FF5B8EA4" Foreground="White" />
             </DockPanel>
         </StackPanel>
 
