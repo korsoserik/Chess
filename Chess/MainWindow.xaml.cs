@@ -61,7 +61,7 @@ namespace Chess
 
         private void UpdateWallet()
         {
-            walletTxb.Text = $"{currentuser.money.ToString():C}";
+            walletTxb.Text = $"{currentuser.money:C}";
         }
 
         private void CalculateCashout()
@@ -74,7 +74,7 @@ namespace Chess
 
 
             currentuser.money += cashoutValue;
-            MessageBox.Show($"You cashed out with {clickedButtonsCount} gems. Cashout Value: {cashoutValue:C}. New Wallet Balance: {currentuser.money:C}");
+            MessageBox.Show($"You cashed out with {clickedButtonsCount} gems. New Wallet Balance: {currentuser.money:C}");
 
 
             currentGameState = GameState.Start;
