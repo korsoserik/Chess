@@ -67,11 +67,14 @@ namespace Chess
 
         private void CalculateCashout()
         {
+            
             decimal tilesCount = ColumnsCount * RowsCount;
-            multiplier = multiplier + (MinesCount / (tilesCount - clickedButtonsCount));
+            multiplier += 1 + (MinesCount / (tilesCount - clickedButtonsCount));
 
 
             decimal cashoutValue = decimal.Parse(BetAmountTxb.Text, NumberStyles.Currency) * multiplier;
+
+
 
 
             currentuser.money += cashoutValue;
@@ -94,7 +97,7 @@ namespace Chess
 
             if (currentGameState == GameState.Start)
             {
-                if (!CheckWallet())
+                if (CheckWallet())
                 {
                     ClearField();
                     LoadField();
@@ -157,7 +160,7 @@ namespace Chess
 
         bool CheckWallet()
         {
-            if (decimal.Parse(BetAmountTxb.Text.Replace(CultureInfo.CurrentCulture.NumberFormat.CurrencySymbol, string.Empty)) > decimal.Parse(BetAmountTxb.Text.Replace(CultureInfo.CurrentCulture.NumberFormat.CurrencySymbol, string.Empty)))
+            if (decimal.Parse(walletTxb.Text.Replace(CultureInfo.CurrentCulture.NumberFormat.CurrencySymbol, string.Empty)) > decimal.Parse(BetAmountTxb.Text.Replace(CultureInfo.CurrentCulture.NumberFormat.CurrencySymbol, string.Empty)))
             {
                 
                 return false;
@@ -517,5 +520,7 @@ namespace Chess
                 MessageBox.Show($"You have to wait {time} minutes to claim your reward");
             }
         }
+
+
     }
 }
