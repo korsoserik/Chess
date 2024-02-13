@@ -346,7 +346,6 @@ namespace Chess
             decimal tilesCount = ColumnsCount * RowsCount;
             multiplier += 1 + (MinesCount / (tilesCount - clickedButtonsCount));
 
-
             decimal cashoutValue = decimal.Parse(BetAmountTxb.Text, NumberStyles.Currency) * multiplier;
             profitTxb.Text = $"{Math.Round(cashoutValue, 2):C}";
         }

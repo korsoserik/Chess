@@ -40,7 +40,7 @@
             </DockPanel>
             <DockPanel>
                 <Label Content="Password:" Foreground="White" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
-                <TextBox x:Name="PasswordTXB"/>
+                <TextBox  x:Name="PasswordTXB"/>
             </DockPanel>
 
 
