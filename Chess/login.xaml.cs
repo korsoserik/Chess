@@ -93,13 +93,11 @@ namespace Chess
                     sw.WriteLine("Userid;Username;Password;Money");
                     foreach (var item in users)
                     {
-                        sw.WriteLine($"{item.id};{item.name};{item.password};{item.money}");
+                        sw.WriteLine($"{item.id};{item.name};{item.password};{item.money};{item.freereward}");
                     }
-                    sw.WriteLine($"{maxId};{UsernameTXB.Text};{PasswordTXB.Text};10000");
+                    sw.WriteLine($"{maxId};{UsernameTXB.Text};{PasswordTXB.Text};10000;{DateTime.Now}");
                     sw.Close();
                     MessageBox.Show("sikeres regisztrácio");
-                    UsernameTXB.Text = "";
-                    PasswordTXB.Text = "";
                     users.Clear();
                     fileRead();
                     int index = 0;

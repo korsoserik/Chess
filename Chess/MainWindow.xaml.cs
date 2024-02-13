@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -476,9 +477,26 @@ namespace Chess
             sw.WriteLine("Userid;Username;Password;Money");
             foreach (var item in users)
             {
-                sw.WriteLine($"{item.id};{item.name};{item.password};{item.money}");
+                sw.WriteLine($"{item.id};{item.name};{item.password};{item.money};{item.freereward}");
             }
             sw.Close();
+        }
+
+        private void freereward_Click(object sender, RoutedEventArgs e)
+        {
+            var mins = (DateTime.Now - currentuser.freereward).TotalMinutes;
+            if (mins > 15 )
+            {
+                currentuser.money += 1000;
+                currentuser.freereward = DateTime.Now;
+                UpdateWallet();
+                MessageBox.Show("You have claimed your reward of 1000 coins");
+            }
+            else
+            {
+                int time = 15 - (int)mins;
+                MessageBox.Show($"You have to wait {time} minutes to claim your reward");
+            }
         }
     }
 }
