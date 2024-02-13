@@ -87,7 +87,7 @@
                                     </ControlTemplate>
                                 </TextBox.Template>
                             </TextBox>
-                            <!-- Popup showing items -->
+                           
                             <Popup Name="Popup" Placement="Bottom"
                    Focusable="False" AllowsTransparency="True"
                    IsOpen="{TemplateBinding ComboBox.IsDropDownOpen}"
@@ -160,14 +160,13 @@
                     <Label Content="Wallet" Margin="0,5,0,0" FontSize="20" Foreground="#FFEEEEEE"/>
                     <TextBox Width="200" Margin="0,5,0,0" IsHitTestVisible="False" x:Name="walletTxb" Background="#FF6D6D6D" BorderBrush="White" Foreground="White"/>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Button Content="ingyengeci" x:Name="freereward" Click="freereward_Click"></Button>
-                </StackPanel>
+         
                 <StackPanel  Orientation="Vertical" Margin="10,50,0,0" HorizontalAlignment="Left">
                     <Label Content="Total Profit" Width="250" Padding="0,10,0,0" Foreground="#FFEEEEEE" />
                     <TextBox Width="250" Height="40" Margin="0,5,0,0" x:Name="profitTxb" IsHitTestVisible="False" Background="#FF6D6D6D" Foreground="White" />
 
 
+                    <Button Content="Login Reward" x:Name="freereward" Click="freereward_Click" Width="250" Height="50" Margin="0,20,0,0" Background="#8CB9BD" Foreground="White" BorderBrush="Black"></Button>
                 </StackPanel>
             </StackPanel>
 
