@@ -358,9 +358,9 @@ namespace Chess
             EnableSettings();
             ToggleButtonText();
             currentuser.money += decimal.Parse(profitTxb.Text, NumberStyles.Currency);
-            MessageBox.Show($"You have found all {clickedButtonsCount - 1} gem(s). You won: {profitTxb.Text}. New Wallet Balance: {currentuser.money:C}");
             walletTxb.Text = $"{currentuser.money:C}";
             profitTxb.Text = $"{0:C}";
+            MessageBox.Show($"You have found all {clickedButtonsCount - 1} gem(s). You won: {profitTxb.Text}. New Wallet Balance: {currentuser.money:C}");
         }
 
         void Cell_Click(object sender, RoutedEventArgs e)
